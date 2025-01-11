@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     try {
         const { username, email, password } = await request.json();
         const existingUserVerifiedByUsername = await UserModel.findOne({ username, isverified: true })
-
+        
         if (existingUserVerifiedByUsername) {
             return Response.json({
                 success: false,
@@ -28,18 +28,19 @@ export async function POST(request: Request) {
                     success: false,
                     message: "User is already taken exist with this email"
                 },
-                    {
-                        status: 400
+                {
+                    status: 400
                     })
             }else{
                 const hashedpassword =  await bcrypt.hash(password,10)
+                console.log(username, email, password )
                 existingUserByEmail.password = hashedpassword;
                 existingUserByEmail.verifyCodeExpiry = new Date(Date.now()+3600000)
                 await existingUserByEmail.save();
             }
 
         } else {
-            const hashedpassword = bcrypt.hash(password, 10)
+            const hashedpassword = await bcrypt.hash(password, 10)
             const expiryDate = new Date();
             expiryDate.setHours(expiryDate.getHours() + 1);
             const newUser = new UserModel({

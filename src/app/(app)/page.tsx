@@ -20,10 +20,10 @@ export default function Home() {
   return (
     <>
       {/* Main content */}
-      <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-gray-800 text-white">
+      <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-purple-50">
         <section className="text-center mb-8 md:mb-12">
           <h1 className="text-3xl md:text-5xl font-bold">
-            Dive into the World of Anonymous Feedback
+            Dive into the World of Mystrius Feedback
           </h1>
           <p className="mt-3 md:mt-4 text-base md:text-lg">
             True Feedback - Where your identity remains a secret.
@@ -38,7 +38,7 @@ export default function Home() {
           <CarouselContent>
             {messages.map((message, index) => (
               <CarouselItem key={index} className="p-4">
-                <Card>
+                <Card className='border-black rounded m-2 '>
                   <CardHeader>
                     <CardTitle>{message.title}</CardTitle>
                   </CardHeader>

@@ -48,8 +48,8 @@ function VerifyAccount() {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex justify-center items-center min-h-screen bg-purple-50">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-[8px] shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Verify Your Account
@@ -69,7 +69,7 @@ function VerifyAccount() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Verify</Button>
+            <Button className="bg-black text-white rounded-[8px] hover:text-black hover:border" type="submit">Verify</Button>
           </form>
         </Form>
       </div>

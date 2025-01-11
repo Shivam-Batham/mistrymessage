@@ -22,7 +22,7 @@ export default function Page() {
   const { toast } = useToast();
 
   const handleDeleteMessage = (messageId: string) => {
-    setMessages(messages.filter((message) => messageId !== message._id));
+    setMessages(messages.filter((message) => message._id !== messageId));
   };
   const { data: session } = useSession();
   const form = useForm({
@@ -131,7 +131,7 @@ export default function Page() {
             disabled
             className="input input-bordered w-full p-2 mr-2"
           />
-          <Button onClick={copyToClipboard}>Copy</Button>
+          <Button className="border rounded hover:border-black" onClick={copyToClipboard}>Copy</Button>
         </div>
       </div>
 
@@ -141,6 +141,7 @@ export default function Page() {
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
+          className=""
         />
         <span className="ml-2">
           Accept Messages: {acceptMessages ? 'On' : 'Off'}
@@ -149,7 +150,7 @@ export default function Page() {
       <Separator />
 
       <Button
-        className="mt-4"
+        className="mt-4 rounded"
         variant="outline"
         onClick={(e) => {
           e.preventDefault();
@@ -166,7 +167,7 @@ export default function Page() {
         {messages.length > 0 ? (
           messages.map((message, index) => (
             <MessageCard
-              key={message._id}
+              key={index}
               message={message}
               onMessageDelete={handleDeleteMessage}
             />
