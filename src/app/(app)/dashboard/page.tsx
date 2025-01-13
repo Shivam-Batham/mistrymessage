@@ -13,8 +13,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { MessageCard } from "@/components/messageCard";
 import { User } from "next-auth";
-import { AcceptMessageSchema } from "../../../schemas/acceptMessageSchema";
-
+import { AcceptMessageSchema } from "@/schemas/acceptMessageSchema";
 
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
