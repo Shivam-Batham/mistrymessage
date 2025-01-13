@@ -1,7 +1,6 @@
 "use client";
 import { useToast } from "@/hooks/use-toast";
 import { Message } from "@/model/User";
-import { AcceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
@@ -14,6 +13,8 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { MessageCard } from "@/components/messageCard";
 import { User } from "next-auth";
+import { AcceptMessageSchema } from "../../../schemas/acceptMessageSchema";
+
 
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
