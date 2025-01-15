@@ -47,7 +47,7 @@ export default function Page() {
     } finally {
       setIsSwitchLoading(false);
     }
-  }, [setValue]);
+  }, [setValue,toast]);
 
   const fetchMessages = useCallback(async (refresh: boolean = false) => {
     setIsLoading(true);
@@ -75,11 +75,11 @@ export default function Page() {
       setIsLoading(false);
       setIsSwitchLoading(false);
     }
-  }, [setIsLoading,setMessages]);
+  }, [setIsLoading,setMessages,toast]);
 
   useEffect(()=>{
     if(!session || !session.user) return;
-  },[session,setValue,fetchAcceptMessage,fetchMessages])
+  },[session,setValue,toast,fetchAcceptMessage,fetchMessages])
   
   const handleSwitchChange = async ()=>{
     try{

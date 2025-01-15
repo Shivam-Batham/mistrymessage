@@ -44,7 +44,7 @@ export const authOptions :NextAuthOptions = {
         })
     ],
     callbacks:{
-        async jwt({ token, user, account, profile, isNewUser }) {
+        async jwt({ token, user }) {
             if(user){
                 token._id=user._id?.toString();
                 token.isVerified=user.isVerified;
@@ -53,7 +53,7 @@ export const authOptions :NextAuthOptions = {
             }
             return token
         },
-        async session({ session, user, token }) {
+        async session({ session, token }) {
            if(token){
             session.user._id=token._id ;
             session.user.isVerified=token.isVerified;
@@ -63,11 +63,11 @@ export const authOptions :NextAuthOptions = {
             return session
         },
     },
-    pages:{
-        signIn:"/sign-in"
-    },
+    secret:process.env.NEXTAUTH_SECRET,
     session:{
         strategy:"jwt"
     },
-    secret:process.env.NEXTAUTH_SECRET
+    pages:{
+        signIn:"/sign-in"
+    },
 }

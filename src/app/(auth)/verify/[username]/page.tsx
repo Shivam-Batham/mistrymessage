@@ -16,7 +16,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { verifySchema } from "@/schemas/verifySchema";
-import { Description } from "@radix-ui/react-toast";
 
 function VerifyAccount() {
   const router = useRouter();

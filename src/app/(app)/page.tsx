@@ -1,10 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+
 import { Mail } from 'lucide-react'; // Assuming you have an icon for messages
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Autoplay from 'embla-carousel-autoplay';
 import messages from '@/messages.json';
 
@@ -12,11 +10,37 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel';
+import { useEffect, useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { ApiResponse, getUser } from '@/types/ApiResponse';
+import { toast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter()
+  const [users, setUsers] = useState<getUser[]>();
+  const getAllUsers = async () => {
+    try {
+      const response = await axios.get<ApiResponse>("/api/get-users");
+      if (response.status === 200) {
+        setUsers(response.data.users);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast({
+        title: "Error",
+        description:
+          axiosError.response?.data.message ||
+          "Failed to fetch message setting",
+        variant: "destructive",
+      });
+    }
+  }
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+
   return (
     <>
       {/* Main content */}
@@ -26,7 +50,7 @@ export default function Home() {
             Dive into the World of Mystrius Feedback
           </h1>
           <p className="mt-3 md:mt-4 text-base md:text-lg">
-            True Feedback - Where your identity remains a secret.
+            True Appriciation - Where your identity remains a secret.
           </p>
         </section>
 
@@ -57,8 +81,27 @@ export default function Home() {
           </CarouselContent>
         </Carousel>
       </main>
+      <section id='users' className="w-[100%] bg-blue-400">
+        {users?.map((user) => (
 
-      {/* Footer */}
+          <Card className='border-black rounded m-4 bg-white'>
+            <CardHeader>
+              <CardTitle className='border-black rounded  ' onClick={() => router.replace(`/u/${user.username}`)}>@ {user.username}</CardTitle>
+              <CardDescription>SDE</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col md:flex-row items-start space-y-2 md:space-y-0 md:space-x-4">
+              <Mail className="flex-shrink-0" />
+              <div>
+                <p>Would you like send meassage!</p>
+                <p className="text-xs text-muted-foreground">
+                1 day ago
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+        ))}
+      </section>
       <footer className="text-center p-4 md:p-6 bg-gray-900 text-white">
         © 2025 Mystry Messages. All rights reserved.
       </footer>
