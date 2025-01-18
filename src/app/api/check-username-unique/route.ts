@@ -16,9 +16,8 @@ export async function GET(request :Request){
             username : searchParams.get("username")
         }
         const result = UsernameQuerySchema.safeParse(queryParam);
-        console.log("check",result.success, result.data)
         if(!result.success){
-            const usernameErrors = result.error.format().username?._errors || []
+            // const usernameErrors = result.error.format().username?._errors || []
             return Response.json({
                 success:false,
                 message:"Invalid query parameters"
@@ -41,7 +40,6 @@ export async function GET(request :Request){
         },{status:200})
 
     }catch(err){
-        console.log("Error checking username",err)
         return Response.json({
             success:false,
             message:"Errro checking username"

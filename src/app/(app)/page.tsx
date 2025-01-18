@@ -2,7 +2,7 @@
 
 
 import { Mail } from 'lucide-react'; // Assuming you have an icon for messages
-import { Card, CardDescription, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Autoplay from 'embla-carousel-autoplay';
 import messages from '@/messages.json';
 
@@ -84,7 +84,7 @@ export default function Home() {
       <section id='users' className="w-[100%] bg-blue-400">
         {users?.map((user) => (
 
-          <Card className='border-black rounded m-4 bg-white'>
+          <Card key={user.username} className='border-black rounded m-4 bg-white'>
             <CardHeader>
               <CardTitle className='border-black rounded  ' onClick={() => router.replace(`/u/${user.username}`)}>@ {user.username}</CardTitle>
               <CardDescription>SDE</CardDescription>

@@ -5,7 +5,7 @@ import { UserModel } from "@/model/User";
 import { User } from "next-auth"; 
 import mongoose from "mongoose";
 
-export async function GET(request:Request){
+export async function GET(){
 
     await dbConnect();
     const session = await getServerSession(authOptions)
@@ -19,7 +19,7 @@ export async function GET(request:Request){
     const userId = new mongoose.Types.ObjectId(user._id);
     try{
         const user = await UserModel.findById({_id:userId})
-        console.log(user.messages)
+       
         // const user = await UserModel.aggregate([
         //     {$match:{id:userId}},
         //     {$unwind:"$messages"},
@@ -39,7 +39,6 @@ export async function GET(request:Request){
             messages:user.messages
         },{status:200})
     }catch(err){
-        console.log("Error in getting message",err)
         return Response.json({
             success:false,
             message:"Error in getting message"

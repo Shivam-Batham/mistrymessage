@@ -4,16 +4,9 @@ import { UserModel } from '@/model/User';
 import dbConnect from '@/lib/dbConnect';
 import { authOptions } from '../../auth/[...nextauth]/options';
 
-type RouteContext = {
-  params: {
-    messageid: string;
-  };
-};
 
-export async function DELETE(
-  _request: NextRequest,
-  context: RouteContext
-) {
+
+export async function DELETE(request: NextRequest) {
   try {
     await dbConnect();
     const session = await getServerSession(authOptions);
@@ -26,7 +19,7 @@ export async function DELETE(
     }
 
     const userId = (session.user as any)._id;
-    const messageId = context.params.messageid;
+    const messageId = request.nextUrl.searchParams.get('messageid');
 
     const updateResult = await UserModel.updateOne(
       { _id: userId },

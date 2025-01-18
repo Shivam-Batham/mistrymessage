@@ -2,7 +2,7 @@
 import dbConnect from "@/lib/dbConnect";
 import { UserModel } from "@/model/User";
 
-export async function GET(request: Request) {
+export async function GET() {
 
     await dbConnect();
     try {
@@ -20,7 +20,6 @@ export async function GET(request: Request) {
             users: users
         }, { status: 200 })
     } catch (err) {
-        console.log("Error in getting users", err)
         return Response.json({
             success: false,
             message: "Error in getting users"

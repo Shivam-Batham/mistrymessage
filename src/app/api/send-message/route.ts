@@ -28,7 +28,6 @@ export async function POST(request:Request){
             message:"Message sent succesfully"
         },{status:200})
     }catch(err){
-        console.log("Error in adding message",err)
         return Response.json({
             success:false,
             message:"Error in sending message"

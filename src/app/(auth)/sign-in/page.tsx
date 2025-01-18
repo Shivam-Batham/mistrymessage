@@ -62,7 +62,7 @@ const [isLoading, setIsLoading] = useState(false);
       }
     }catch (error) {
       toast({
-        title: 'Error',
+        title: error instanceof Error ? error.message : "An error occurred",
         description:"Try again later.",
         variant: 'destructive',
       });

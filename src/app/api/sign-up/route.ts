@@ -33,7 +33,6 @@ export async function POST(request: Request) {
                     })
             }else{
                 const hashedpassword =  await bcrypt.hash(password,10)
-                console.log(username, email, password )
                 existingUserByEmail.password = hashedpassword;
                 existingUserByEmail.verifyCodeExpiry = new Date(Date.now()+3600000)
                 await existingUserByEmail.save();
@@ -76,7 +75,6 @@ export async function POST(request: Request) {
         })
 
     } catch (err) {
-        console.log("Error in registering user", err)
         return Response.json({
             success: false,
             message: "Error registering user"

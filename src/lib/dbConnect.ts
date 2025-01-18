@@ -8,16 +8,15 @@ const connection :ConnectionObject = {}
 
 async function dbConnect(): Promise<void>{
     if(connection.isConnected){
-        console.log("Already connected to DB")
+        // console.log("Already connected to DB")
         return;
     }
     try{
-        console.log("trying .......DB connect")
         const db = await mongoose.connect(process.env.MONGODB_URI || '', {});
         connection.isConnected =  db.connections[0].readyState
-        console.log("DB connected successfully")
+        // console.log("DB connected successfully")
     }catch(err){
-        console.log("DB connection failed",err)
+        // console.log("DB connection failed",err)
         // process.exit(1);
     }
 }

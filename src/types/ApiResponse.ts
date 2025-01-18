@@ -1,4 +1,4 @@
-import User, { Message } from "@/model/User";
+import { Message } from "@/model/User";
 export type getUser = {
     username :string,
     _id:string

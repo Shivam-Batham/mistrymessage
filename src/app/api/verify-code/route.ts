@@ -37,7 +37,6 @@ export async function POST(request:Request){
 
 
     }catch(err){
-        console.log("Error verifing user",err);
         return Response.json({
             success:false,
             message:"Error verifying user"
